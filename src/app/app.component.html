@@ -1,0 +1,70 @@
+<div *ngIf="countries.length!=0; else loading">
+  <div style="display: flex; flex-direction: row; margin-bottom: 20px;" >
+    <div>
+    <label for="" style="margin-right:12px">Select Country</label>
+      <select name="" id="" (change)="filterData()" [(ngModel)]="selectedCountry" style="margin-right:40px">
+        <option value="All">All</option>
+        <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+      </select>
+    </div>
+    <div>
+      <label for="" style="margin-right:12px">Search Univercity</label>
+      <input type="text" [(ngModel)]="searchedText" (input)="filterData()">
+    </div>
+    </div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th  >
+        Country
+      </th>
+      <th >
+        Country Code
+      </th>
+      <th >
+        Website
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of visibleData">
+      <td>{{ item.name }}</td>
+      <td>{{ item.country }}</td>
+      <td>{{ item.alpha_two_code }}</td>
+      <td><a href="{{ item.web_pages[0] }}">{{ item.web_pages[0] }}</a></td>
+    </tr>
+  </tbody>
+</table>
+<div class="pagination">
+  <div>
+    <label for="" style="margin-right:12px">Univercity Per Page</label>
+    <select style="margin-right:12px" [(ngModel)]="pageSize" name="" id="" (change)="onPageSizeChange()" >
+      <option value="5" >5</option>
+      <option value="10" >10</option>
+      <option value="25" >25</option>
+      <option value="50" >50</option>
+      <option value="100" >100</option>
+    </select>
+
+  </div>
+
+  <button (click)="prevPage()">Prev</button>
+  <span>{{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="nextPage()">Next</button>
+</div>
+</div>
+
+<ng-template #loading>
+  <div style="display: flex; height: 100vh; width: 100vw; align-items: center; justify-content: center;">
+    Loading Data... &nbsp; Please Wait
+    
+  </div>
+</ng-template>
+
+
+
