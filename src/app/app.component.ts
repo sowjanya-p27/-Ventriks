@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 
@@ -86,6 +86,7 @@ export class AppComponent implements OnInit {
 
 
   getData(){
+    const headers = new HttpHeaders({ 'Access-Control-Allow-Origin': 'https://sowjanya-p27.github.io/' });
     this.http.get<IUnivercities>(environment.apiUrl).subscribe((data: IUnivercities)=>{
       this.data = data
       this.countries = this.data.map((u)=>{
